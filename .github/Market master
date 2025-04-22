@@ -1,0 +1,81 @@
+import React from 'react';
+
+// Mock data for expiration alerts const expirationAlerts = [ { product: 'Yogurt 200ml', expiryDate: '2025-04-25', daysLeft: 3 }, { product: 'Cheese 250g', expiryDate: '2025-04-28', daysLeft: 6 }, ];
+
+// Mock data for inventory alerts const inventoryAlerts = [ { product: 'Sugar 1kg', quantity: 2, status: 'Low Stock' }, { product: 'Salt 500g', quantity: 0, status: 'Out of Stock' }, ];
+
+// Mock data for reports const analytics = { totalSales: 1540000, topProduct: 'Rice 5kg', topCustomer: 'Joshua M.', dailyRevenue: [ { day: 'Mon', sales: 200000 }, { day: 'Tue', sales: 250000 }, { day: 'Wed', sales: 180000 }, { day: 'Thu', sales: 300000 }, { day: 'Fri', sales: 310000 }, { day: 'Sat', sales: 400000 }, { day: 'Sun', sales: 350000 }, ] };
+
+const ExpirationDateAlerts = () => (
+
+  <div className="p-4 text-white">
+    <h1 className="text-2xl font-bold mb-4">Expiration Date Alerts</h1>
+    <div className="bg-gray-800 p-6 rounded-xl shadow-lg">
+      <table className="w-full table-auto">
+        <thead>
+          <tr className="text-left text-gray-400">
+            <th className="pb-2">Product</th>
+            <th className="pb-2">Expiry Date</th>
+            <th className="pb-2">Days Left</th>
+          </tr>
+        </thead>
+        <tbody>
+          {expirationAlerts.map((item, index) => (
+            <tr key={index} className="border-t border-gray-700">
+              <td className="py-2">{item.product}</td>
+              <td className="py-2">{item.expiryDate}</td>
+              <td className={`py-2 ${item.daysLeft <= 3 ? 'text-red-500' : 'text-yellow-400'}`}>{item.daysLeft}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+);const InventoryAlerts = () => (
+
+  <div className="p-4 text-white">
+    <h1 className="text-2xl font-bold mb-4">Inventory Alerts</h1>
+    <div className="bg-gray-800 p-6 rounded-xl shadow-lg">
+      <table className="w-full table-auto">
+        <thead>
+          <tr className="text-left text-gray-400">
+            <th className="pb-2">Product</th>
+            <th className="pb-2">Quantity</th>
+            <th className="pb-2">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {inventoryAlerts.map((alert, index) => (
+            <tr key={index} className="border-t border-gray-700">
+              <td className="py-2">{alert.product}</td>
+              <td className="py-2">{alert.quantity}</td>
+              <td className={`py-2 ${alert.status === 'Low Stock' ? 'text-yellow-400' : 'text-red-500'}`}>{alert.status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+);const ReportingAnalytics = () => (
+
+  <div className="p-4 text-white">
+    <h1 className="text-2xl font-bold mb-4">Reporting & Analytics</h1>
+    <div className="bg-gray-800 p-6 rounded-xl shadow-lg space-y-4">
+      <p>Total Sales: <span className="text-green-400">UGX {analytics.totalSales.toLocaleString()}</span></p>
+      <p>Top Product: <span className="text-yellow-400">{analytics.topProduct}</span></p>
+      <p>Top Customer: <span className="text-blue-400">{analytics.topCustomer}</span></p>
+      <div className="pt-4">
+        <h2 className="text-xl font-semibold mb-2">Daily Revenue</h2>
+        <ul>
+          {analytics.dailyRevenue.map((entry, index) => (
+            <li key={index} className="flex justify-between border-t border-gray-700 py-1">
+              <span>{entry.day}</span>
+              <span className="text-green-300">UGX {entry.sales.toLocaleString()}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+);export { ExpirationDateAlerts, InventoryAlerts, ReportingAnalytics };
+
